@@ -6,7 +6,7 @@
 /*   By: randrina <randrina@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:36:53 by randrina          #+#    #+#             */
-/*   Updated: 2024/08/01 14:12:40 by randrina         ###   ########.fr       */
+/*   Updated: 2024/08/01 14:46:22 by randrina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,32 @@ void	insert_play_pos(t_map *map_info, char **map)
 	}
 }
 
+void	insert_exit_pos(t_map *map_info, char **map)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'E')
+			{
+				map_info->ex = x;
+				map_info->ey = y;
+
+			}
+			x ++;
+		}
+		y ++;
+	}
+}
+
 void	insert_info(t_map *map_info, char **map)
 {
 	insert_surf(map_info, map);
 	insert_play_pos(map_info, map);
+	insert_exit_pos(map_info, map);
 }

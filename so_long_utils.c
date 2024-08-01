@@ -6,7 +6,7 @@
 /*   By: randrina <randrina@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 00:06:23 by randrina          #+#    #+#             */
-/*   Updated: 2024/08/01 08:17:50 by randrina         ###   ########.fr       */
+/*   Updated: 2024/08/01 14:29:00 by randrina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ int	map_arg_check(char *map)
 		i ++;
 	}
 	return (1);
+}
+
+void	show_info(t_map *map)
+{
+	printf("px-[%d]--py-[%d]--height[%d]--width[%d]\n", map->px, map->py, map->height, map->width);
 }
 
 void	show_map(char **map)

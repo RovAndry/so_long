@@ -27,7 +27,10 @@ int main(int argc, char **argv)
 		{
 			maps = create_struct();
 			insert_info(maps, map);
+			show_info(maps);
 			show_map(map);
+			printf("\n\n");
+			ft_check_road(map, maps);
 			tab_free(map);
 		}
 	}	
