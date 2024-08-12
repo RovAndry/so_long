@@ -44,7 +44,7 @@ void	window_gen(char **map, t_map *map_info)
 
 	window_disp(data);
 	mlx_key_hook(data->wn_ptr, manage_move, data);
-//	mlx_hook(data->wn_ptr, 17, 0, ft_exit, data);
+	mlx_hook(data->wn_ptr, 17, 0, ft_exit, data);
 	mlx_loop(data->mx_ptr);
 	free(data);
 }

@@ -27,6 +27,11 @@ static void	move_top(t_data *data)
 		data->map->py = data->map->py - 1;
 		y = data->map->py;
 		data->m_tab[y][x] = 'P';
+		display_other(data, x * 50, (y + 1) * 50);
+		display_other(data, x * 50, y * 50);
+		data->count = data->count + 1;
+		ft_putnbr_fd(data->count, 1);
+		ft_putchar_fd('\n', 1);
 		if (data->col_nbr == 0 && x == data->map->ex && y == data->map->ey)
 			ft_exit(data);
 	}
@@ -47,6 +52,11 @@ static void	move_down(t_data *data)
 		data->map->py = data->map->py + 1;
 		y = data->map->py;
 		data->m_tab[y][x] = 'P';
+		display_other(data, x * 50, (y - 1) * 50);
+		display_other(data, x * 50, y *50);
+		data->count = data->count + 1;
+		ft_putnbr_fd(data->count, 1);
+		ft_putchar_fd('\n', 1);
 		if (data->col_nbr == 0 && x == data->map->ex && y == data->map->ey)
             ft_exit(data);
 	}
@@ -67,6 +77,11 @@ static void	move_left(t_data *data)
 		data->map->px = data->map->px - 1;
 		x = data->map->px;
 		data->m_tab[y][x] = 'P';
+		display_other(data, (x + 1) * 50, y * 50);
+		display_other(data, x * 50, y * 50);
+		data->count = data->count + 1;
+		ft_putnbr_fd(data->count, 1);
+		ft_putchar_fd('\n', 1);
 		if (data->col_nbr == 0 && x == data->map->ex && y == data->map->ey)
             ft_exit(data);
 	}
@@ -87,6 +102,11 @@ static void	move_right(t_data *data)
 		data->map->px = data->map->px + 1;
 		x = data->map->px;
 		data->m_tab[y][x] = 'P';
+		display_other(data, (x - 1) * 50, y * 50);
+		display_other(data, x * 50, y * 50);
+		data->count = data->count + 1;
+		ft_putnbr_fd(data->count, 1);
+		ft_putchar_fd('\n', 1);
 		if (data->col_nbr == 0 && x == data->map->ex && y == data->map->ey)
             ft_exit(data);
 	}
@@ -95,28 +115,14 @@ static void	move_right(t_data *data)
 int	manage_move(int keycode, t_data *data)
 {
 	if (keycode == 'w')
-	{
-		mlx_clear_window(data->mx_ptr, data->wn_ptr);
 		move_top(data);
-		window_disp(data);
-	}
 	else if (keycode == 's')
-	{
-		mlx_clear_window(data->mx_ptr, data->wn_ptr);
 		move_down(data);
-		window_disp(data);
-	}
 	else if (keycode == 'a')
-	{
-		mlx_clear_window(data->mx_ptr, data->wn_ptr);
 		move_left(data);
-		window_disp(data);
-	}
 	else if (keycode == 'd')
-	{
-		mlx_clear_window(data->mx_ptr, data->wn_ptr);
 		move_right(data);
-		window_disp(data);
-	}
+	if (data->col_nbr == 0)
+		display_exit(data, data->map->ex * 50, data->map->ey * 50);
 	return (1);
 }

@@ -72,6 +72,8 @@ void	display_collect(t_data *data, int x, int y);
 void	window_gen(char **map, t_map *map_info);
 void	display_other(t_data *data, int x, int y);
 void	display_player(t_data *data, int x, int y);
+void	display_exit(t_data *data, int x, int y);
+void	display_way(t_data *data, int x, int y);
 void	window_disp(t_data *data);
 int		manage_move(int keycode, t_data *data);
 

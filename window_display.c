@@ -39,7 +39,7 @@ void	display_wall(t_data *data, int x, int y)
 	mlx_destroy_image(data->mx_ptr, data->img_wal);
 }
 
-static void	display_exit(t_data *data, int x, int y)
+void	display_exit(t_data *data, int x, int y)
 {
 	data->img_ex = mlx_xpm_file_to_image(data->mx_ptr, "exit.xpm", &data->w,
 			&data->h);
@@ -47,7 +47,7 @@ static void	display_exit(t_data *data, int x, int y)
 	mlx_destroy_image(data->mx_ptr, data->img_ex);
 }
 
-static void	display_way(t_data *data, int x, int y)
+void	display_way(t_data *data, int x, int y)
 {
 	data->img_way = mlx_xpm_file_to_image(data->mx_ptr, "way.xpm", &data->w,
 			&data->h);
@@ -57,8 +57,8 @@ static void	display_way(t_data *data, int x, int y)
 
 void	display_other(t_data *data, int x, int y)
 {
-	if (data->m_tab[y / 50][x / 50] == 'E')
-		display_exit(data, x, y);
+	if (data->m_tab[y / 50][x / 50] == 'E' && data->col_nbr != 0)
+		display_way(data, x, y);
 	else if (data->m_tab[y / 50][x / 50] == 'C')
 		display_collect(data, x, y);
 	else if (data->m_tab[y / 50][x / 50] == 'P')
