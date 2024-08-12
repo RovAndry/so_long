@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
+/*   so_long_utils1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: randrina <randrina@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/28 09:49:29 by randrina          #+#    #+#             */
-/*   Updated: 2024/02/28 14:37:28 by randrina         ###   ########.fr       */
+/*   Created: 2024/08/12 14:39:08 by randrina          #+#    #+#             */
+/*   Updated: 2024/08/12 15:17:08 by randrina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long.h"
 
-t_list	*ft_lstlast(t_list *lst)
+int	collect_nbr(char **map)
 {
-	t_list	*last;
+	int	x;
+	int	y;
+	int	count;
 
-	if (lst == NULL)
-		return (NULL);
-	last = lst;
-	while (last->next)
-		last = last->next;
-	return (last);
+	y = 0;
+	count = 0;
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == 'C')
+				count ++;
+			x ++;
+		}
+		y ++;
+	}
+	return (count);
 }

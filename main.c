@@ -1,55 +1,65 @@
-
+/* ************************************************************************** */
+/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: randrina <randrina@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/22 08:04:33 by randrina          #+#    #+#             */
-/*   Updated: 2024/07/31 19:24:17 by randrina         ###   ########.fr       */
+/*   Created: 2024/08/08 09:57:55 by randrina          #+#    #+#             */
+/*   Updated: 2024/08/12 16:31:00 by randrina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int main(int argc, char **argv)
+void	ft_free(char **str)
 {
-	/*void	*mlx_ptr;
-	void	*win_ptr;
-	int 	x;
-	int		y;*/
-	char 	**map;
-	t_map	*maps;
+	int	i;
+	
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i ++;
+	}
+	free(str);
+}
+int	ft_exit(t_data *data)
+{
+	mlx_destroy_window(data->mx_ptr, data->wn_ptr);
+	mlx_destroy_display(data->mx_ptr);
+	free(data->mx_ptr);
+	ft_free(data->m_tab);
+	free(data->map);
+	free(data);
+	exit(0);
+	return (0);
+}
+
+void	window_gen(char **map, t_map *map_info)
+{
+	t_data	*data;
+
+	data = create_data(map_info, map);
+
+	window_disp(data);
+	mlx_key_hook(data->wn_ptr, manage_move, data);
+//	mlx_hook(data->wn_ptr, 17, 0, ft_exit, data);
+	mlx_loop(data->mx_ptr);
+	free(data);
+}
+
+int	main(int argc, char **argv)
+{
+	char	**map;
+	t_map	*map_info;
 
 	if (argc == 2)
 	{
-		map = map_check(argv[1]);
-		if (map != NULL)
-		{
-			maps = create_struct();
-			insert_info(maps, map);
-			show_info(maps);
-			show_map(map);
-			printf("\n\n");
-			ft_check_road(map, maps);
-			tab_free(map);
-		}
-	}	
-	/*mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, 500, 500, "window");
-	y = 0;
-	while (y < 500)
-	{
-		x = 0;
-		while (x < 500)
-		{
-			if (x % 2 == 0 && y % 2 == 0)
-				mlx_pixel_put(mlx_ptr, win_ptr, x, y, 0xffd700);
-			else
-				mlx_pixel_put(mlx_ptr, win_ptr, x, y, 0xff00ff);
-			x ++;
-		}
-		y ++;
+		map = all_chek(argv[1]);
+		map_info = create_struct();
+		insert_info(map_info, map);
+		window_gen(map, map_info);
 	}
-	mlx_loop(mlx_ptr);*/
 	return (0);
 }

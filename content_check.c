@@ -6,7 +6,7 @@
 /*   By: randrina <randrina@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 04:19:06 by randrina          #+#    #+#             */
-/*   Updated: 2024/08/01 08:43:42 by randrina         ###   ########.fr       */
+/*   Updated: 2024/08/12 13:33:53 by event            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	exit_many_elem(char **map, char *elem)
 		i ++;
 	}
 	free(map);
-	ft_putstr_fd("too many ", STDERR_FILENO);
+	ft_putstr_fd("Error\nToo many ", STDERR_FILENO);
 	ft_putstr_fd(elem, STDERR_FILENO);
 	exit(EXIT_FAILURE);
 }
@@ -105,8 +105,7 @@ void	exit_no_elem(char **map, char *elem)
 		i ++;
 	}
 	free(map);
-	ft_putstr_fd("map no ", STDERR_FILENO);
+	ft_putstr_fd("Error\nMap no ", STDERR_FILENO);
 	ft_putstr_fd(elem, STDERR_FILENO);
 	exit(EXIT_FAILURE);
-	
 }

@@ -6,7 +6,7 @@
 /*   By: randrina <randrina@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 08:45:46 by randrina          #+#    #+#             */
-/*   Updated: 2024/07/31 23:15:52 by randrina         ###   ########.fr       */
+/*   Updated: 2024/08/07 12:44:35 by randrina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*ft_strdup_get(char *s)
 	return (new);
 }
 
-char	*ft_strcpy_get(char *dest, char *s1, char *s2)
+char	*ft_strcpy(char *dest, char *s1, char *s2)
 {
 	int	len;
 	int	i;
@@ -70,7 +70,7 @@ char	*ft_strcpy_get(char *dest, char *s1, char *s2)
 	i = 0;
 	if (s1)
 	{
-		len = ft_strlen(s1);
+		len = ft_strlen_get(s1);
 		while (i < len)
 		{
 			dest[i] = s1[i];
@@ -109,7 +109,7 @@ char	*ft_strjoin_get(char *s1, char *s2)
 			free(s1);
 		return (NULL);
 	}
-	final = ft_strcpy_get(final, s1, s2);
+	final = ft_strcpy(final, s1, s2);
 	if (s1)
 		free(s1);
 	return (final);

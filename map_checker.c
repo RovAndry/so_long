@@ -6,7 +6,7 @@
 /*   By: randrina <randrina@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/31 21:48:15 by randrina          #+#    #+#             */
-/*   Updated: 2024/08/01 14:01:47 by randrina         ###   ########.fr       */
+/*   Updated: 2024/08/08 09:42:23 by randrina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,18 @@ static int	file_check(char *map)
 {
 	int		fd;
 	char	*ext;
-	char	*real_ext;
+	char	*map_c;
 
-	real_ext = ".ber";
+	map_c = ft_strrchr(map, '/');
+	if (map_c)
+		map_c += 1;
+	else
+		map_c = map;
 	ext = ft_strrchr(map, '.');
-	if (ext == NULL || ft_strncmp(real_ext, ext, 5))
+	if (ext == NULL || ft_strncmp(".ber", ext, 5) || ft_strlen(map_c) <= 4
+		|| *map_c == '.')
 	{
-		ft_putstr_fd("wrong file !\n", STDERR_FILENO);
+		ft_putstr_fd("Error\nWrong file !\n", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
 	else
@@ -36,7 +41,9 @@ static char	**map_insert(int fd)
 	char	*full;
 	char	*line;
 
-	full = ft_strdup("");
+	full = empty_check(fd);
+	if (full == NULL)
+		full = ft_strdup("");
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -45,13 +52,13 @@ static char	**map_insert(int fd)
 		line = get_next_line(fd);
 	}
 	free(line);
-	table = ft_split(full, '\n');
-	if (!map_arg_check(full))
+	if (map_arg_check(full) == 0)
 	{
-		ft_putstr_fd("wrong map !\n", STDERR_FILENO);
 		free(full);
+		ft_putstr_fd("Error\nWrong map !\n", STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
+	table = ft_split(full, '\n');
 	free(full);
 	return (table);
 }
@@ -92,7 +99,7 @@ void	check_elem(char **map)
 	else if (perso_check(map) > 1)
 		exit_many_elem(map, "perso !\n");
 	else if (collec_check(map) == 0)
-		exit_no_elem(map, "collect !");
+		exit_no_elem(map, "collect !\n");
 }
 
 char	**map_check(char *map)
@@ -103,8 +110,8 @@ char	**map_check(char *map)
 	fd = file_check(map);
 	if (fd == -1)
 	{
-		ft_putstr_fd("wrong file !\n", STDERR_FILENO);
-		return (NULL);
+		ft_putstr_fd("Error\nWrong file !\n", STDERR_FILENO);
+		exit(EXIT_FAILURE);
 	}
 	map_table = map_insert(fd);
 	if (!check_format(map_table))

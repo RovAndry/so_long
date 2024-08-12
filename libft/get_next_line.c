@@ -6,7 +6,7 @@
 /*   By: randrina <randrina@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 08:45:10 by randrina          #+#    #+#             */
-/*   Updated: 2024/07/31 23:17:36 by randrina         ###   ########.fr       */
+/*   Updated: 2024/08/07 13:04:23 by randrina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ char	*ft_read_line(int fd, char *stash)
 	char	*buffer;
 	int		nb_read;
 
-	buffer = NULL;
 	buffer = (char *) malloc (sizeof(char) * (BUFFER_SIZE + 1));
 	if (buffer == NULL)
 		return (NULL);
@@ -26,7 +25,10 @@ char	*ft_read_line(int fd, char *stash)
 	{
 		nb_read = read(fd, buffer, BUFFER_SIZE);
 		if (nb_read == -1)
-			return (free(buffer), NULL);
+		{
+			free(buffer);
+			return (NULL);
+		}
 		buffer[nb_read] = '\0';
 		stash = ft_strjoin_get(stash, buffer);
 	}
@@ -43,7 +45,6 @@ char	*ft_def_line(char *str)
 {
 	char	*line;
 	int		i;
-	int		j;
 
 	line = NULL;
 	if (str == NULL)
@@ -57,14 +58,11 @@ char	*ft_def_line(char *str)
 		i = i + 1;
 	line = (char *) malloc (sizeof(char) * (i + 1));
 	if (line == NULL)
-		return (free(str), NULL);
-	j = 0;
-	while (j < i)
 	{
-		line[j] = str[j];
-		j ++;
+		free(str);
+		return (NULL);
 	}
-	line[j] = '\0';
+	ft_strlcpy(line, str, i + 1);
 	return (line);
 }
 

@@ -6,7 +6,7 @@
 /*   By: randrina <randrina@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 12:36:53 by randrina          #+#    #+#             */
-/*   Updated: 2024/08/01 14:46:22 by randrina         ###   ########.fr       */
+/*   Updated: 2024/08/12 15:14:39 by randrina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_map	*create_struct(void)
 {
-	t_map *map_info;
+	t_map	*map_info;
 
 	map_info = (t_map *) malloc (sizeof (t_map) + 1);
 	if (map_info == NULL)
@@ -22,7 +22,7 @@ t_map	*create_struct(void)
 	return (map_info);
 }
 
-void	insert_surf(t_map *map_info, char **map)
+static void	insert_surf(t_map *map_info, char **map)
 {
 	int	width;
 	int	height;
@@ -37,7 +37,7 @@ void	insert_surf(t_map *map_info, char **map)
 	map_info->height = height;
 }
 
-void	insert_play_pos(t_map *map_info, char **map)
+static void	insert_play_pos(t_map *map_info, char **map)
 {
 	int	x;
 	int	y;
@@ -54,12 +54,12 @@ void	insert_play_pos(t_map *map_info, char **map)
 				map_info->py = y;
 			}
 			x ++;
-		}	
+		}
 		y ++;
 	}
 }
 
-void	insert_exit_pos(t_map *map_info, char **map)
+static void	insert_exit_pos(t_map *map_info, char **map)
 {
 	int	x;
 	int	y;
@@ -74,7 +74,6 @@ void	insert_exit_pos(t_map *map_info, char **map)
 			{
 				map_info->ex = x;
 				map_info->ey = y;
-
 			}
 			x ++;
 		}

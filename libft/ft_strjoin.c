@@ -6,7 +6,7 @@
 /*   By: randrina <randrina@student.42antanana      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 08:37:41 by randrina          #+#    #+#             */
-/*   Updated: 2024/08/01 06:43:24 by randrina         ###   ########.fr       */
+/*   Updated: 2024/08/07 14:10:01 by randrina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		new[i] = s2[i - s1len];
 		i ++;
 	}
-	free((char *)s1);
 	new[i] = '\0';
+	free((char *)s1);
 	return (new);
 }
