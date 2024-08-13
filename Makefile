@@ -6,7 +6,7 @@
 #    By: randrina <randrina@student.42antanana      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/31 19:22:56 by randrina          #+#    #+#              #
-#    Updated: 2024/08/12 11:10:59 by event            ###   ########.fr        #
+#    Updated: 2024/08/13 08:11:22 by randrina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ NAME	= so_long
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) :$(OBJS)
+	make -C minilibx-linux
 	make -C libft
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -L./libft -lft \
 	-L./minilibx-linux -lmlx -lXext -lX11
@@ -35,6 +36,7 @@ all : $(NAME)
 
 clean :
 	$(RM) $(OBJS)
+	make -C minilibx-linux clean
 	make -C libft clean
 
 fclean : clean
